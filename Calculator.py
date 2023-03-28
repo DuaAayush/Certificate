@@ -2,23 +2,27 @@ from tkinter import *
 import math
 import tkinter.messagebox
 root = Tk()
- 
 
+# sets the name on the top of the gui
 root.title("Scientific Calculator")
- 
 
+# sets the background color of the calculator
+# as white
 root.configure(background = 'white')
- 
 
+# fixed the width and height of the gui,
+# hence can't be expanded/stretched
 root.resizable(width=False, height=False)
- 
 
+# sets the geometry
 root.geometry("480x568+450+90")
- 
 
+# holds the buttons in the calculator,
+# act as a container for numbers and operators
 calc = Frame(root)
- 
 
+# create a grid like pattern of the frame
+# i.e buttons
 calc.grid()
 class Calc():
 	def __init__(self):
@@ -126,7 +130,10 @@ class Calc():
 		self.current = math.cosh(math.radians(float(txtDisplay.get())))
 		self.display(self.current)
 
-	
+	def tan(self):
+		self.result = False
+		self.current = math.tan(math.radians(float(txtDisplay.get())))
+		self.display(self.current)
 
 	def tanh(self):
 		self.result = False
@@ -210,20 +217,23 @@ txtDisplay.grid(row=0,
 				pady=1)
 
 txtDisplay.insert(0, "0")
-
+# store all the numbers in a variable
 numberpad = "789456123"
 
-
+# here i will count the rows for placing buttons
+# in grid
 i = 0
 
-
+# create an empty list to store
+# each button with its particular specifications
 btn = []
 
-
+# j is in that range to place
+# the button in that particular row
 for j in range(2, 5):
 
-		
-	
+		# k is in this range to place the
+	# button in that particular column
 	for k in range(3):
 		btn.append(Button(calc,
 						width=6,
@@ -233,10 +243,11 @@ for j in range(2, 5):
 						font=('Helvetica', 20, 'bold'),
 						bd=4, text=numberpad[i]))
 
-		
+		# set buttons in row & column and
+		# separate them with a padding of 1 unit
 		btn[i].grid(row=j, column=k, pady=1)
 
-		
+		# put that number as a symbol on that button
 		btn[i]["command"] = lambda x=numberpad[i]: added_value.numberEnter(x)
 		i += 1
 btnClear = Button(calc, text=chr(67),
@@ -441,3 +452,44 @@ lblDisplay = Label(calc, text="Scientific Calculator",
 				font=('Helvetica', 30, 'bold'),
 				bg='black', fg='white', justify=CENTER)
 lblDisplay.grid(row=0, column=4, columnspan=4)
+# use askyesno function to
+# stop/continue the program execution
+def iExit():
+	iExit = tkinter.messagebox.askyesno("Scientific Calculator",
+										"Do you want to exit ?")
+	if iExit>0:
+		root.destroy()
+		return
+
+def Scientific():
+	root.resizable(width=False, height=False)
+	root.geometry("944x568+0+0")
+
+
+def Standard():
+	root.resizable(width=False, height=False)
+	root.geometry("480x568+0+0")
+
+menubar = Menu(calc)
+
+# ManuBar 1 :
+
+filemenu = Menu(menubar, tearoff = 0)
+menubar.add_cascade(label = 'File', menu = filemenu)
+filemenu.add_command(label = "Standard", command = Standard)
+filemenu.add_command(label = "Scientific", command = Scientific)
+filemenu.add_separator()
+filemenu.add_command(label = "Exit", command = iExit)
+
+# ManuBar 2 :
+
+editmenu = Menu(menubar, tearoff = 0)
+menubar.add_cascade(label = 'Edit', menu = editmenu)
+editmenu.add_command(label = "Cut")
+editmenu.add_command(label = "Copy")
+editmenu.add_separator()
+editmenu.add_command(label = "Paste")
+
+root.config(menu=menubar)
+
+root.mainloop()
