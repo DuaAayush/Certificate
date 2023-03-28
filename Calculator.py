@@ -3,26 +3,22 @@ import math
 import tkinter.messagebox
 root = Tk()
  
-# sets the name on the top of the gui
+
 root.title("Scientific Calculator")
  
-# sets the background color of the calculator
-# as white
+
 root.configure(background = 'white')
  
-# fixed the width and height of the gui,
-# hence can't be expanded/stretched
+
 root.resizable(width=False, height=False)
  
-# sets the geometry
+
 root.geometry("480x568+450+90")
  
-# holds the buttons in the calculator,
-# act as a container for numbers and operators
+
 calc = Frame(root)
  
-# create a grid like pattern of the frame
-# i.e buttons
+
 calc.grid()
 class Calc():
 	def __init__(self):
@@ -217,23 +213,20 @@ txtDisplay.grid(row=0,
 				pady=1)
 
 txtDisplay.insert(0, "0")
-# store all the numbers in a variable
+
 numberpad = "789456123"
 
-# here i will count the rows for placing buttons
-# in grid
+
 i = 0
 
-# create an empty list to store
-# each button with its particular specifications
+
 btn = []
 
-# j is in that range to place
-# the button in that particular row
+
 for j in range(2, 5):
 
-		# k is in this range to place the
-	# button in that particular column
+		
+	
 	for k in range(3):
 		btn.append(Button(calc,
 						width=6,
@@ -243,11 +236,10 @@ for j in range(2, 5):
 						font=('Helvetica', 20, 'bold'),
 						bd=4, text=numberpad[i]))
 
-		# set buttons in row & column and
-		# separate them with a padding of 1 unit
+		
 		btn[i].grid(row=j, column=k, pady=1)
 
-		# put that number as a symbol on that button
+		
 		btn[i]["command"] = lambda x=numberpad[i]: added_value.numberEnter(x)
 		i += 1
 btnClear = Button(calc, text=chr(67),
