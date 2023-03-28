@@ -91,15 +91,7 @@ class Calc():
 		self.Clear_Entry()
 		self.total = 0
 
-	def pi(self):
-		self.result = False
-		self.current = math.pi
-		self.display(self.current)
-
-	def tau(self):
-		self.result = False
-		self.current = math.tau
-		self.display(self.current)
+	
 
 	def e(self):
 		self.result = False
