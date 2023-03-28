@@ -126,10 +126,7 @@ class Calc():
 		self.current = math.cosh(math.radians(float(txtDisplay.get())))
 		self.display(self.current)
 
-	def tan(self):
-		self.result = False
-		self.current = math.tan(math.radians(float(txtDisplay.get())))
-		self.display(self.current)
+	
 
 	def tanh(self):
 		self.result = False
